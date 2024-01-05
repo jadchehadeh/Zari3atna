@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,12 +33,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #installed apps#
+    'rest_framework',
+    #inprojects apps#
+    'user.apps.UserConfig',
+    #defualt apps#
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+  
+   
 ]
 
 MIDDLEWARE = [
@@ -73,18 +81,18 @@ WSGI_APPLICATION = 'zari3atna.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-
+load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'zari3atna'), 
-        'USER': os.environ.get('DB_USER', 'postgres'), 
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'admin'),  
+        'NAME': os.getenv('DATABASE_NAME', 'zari3atna'), 
+        'USER': os.getenv('DATABASE_USER', 'postgres'), 
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'admin'), 
         'HOST': 'host.docker.internal',
-        'PORT': os.environ.get('DB_PORT', '5432'), 
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
 }
+
 
 
 # Password validation
