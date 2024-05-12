@@ -5,7 +5,11 @@ services:
     image: zari3atna_app
     build: 
       context: .
-      dockerfile: /docker/Dockerfile  
+      dockerfile: docker/Dockerfile  # Adjusted path to the Dockerfile
     ports:
-      -"8000:8000" 
-    env_file:           
+      - "8000:8000" 
+    env_file:
+      - .env  
+    command: bash -c "python manage.py collectstatic --noinput &&  python manage.py migrate --noinput &&  python manage.py runserver 0.0.0.0:8000"           
+    expose:
+      - 8000
