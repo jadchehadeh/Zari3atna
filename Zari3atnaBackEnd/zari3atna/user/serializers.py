@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from .models import UserDetail
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
-
     class Meta:
         model = User
         fields = ["first_name", "last_name", "username", "email", "password"]
@@ -23,5 +21,5 @@ class UserDetailSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = UserSerializer.create(UserSerializer(), validated_data=user_data)
-        user_detail, created = UserDetail.objects.update_or_create(user=user, photo=validated_data.pop('photo'))
+        user_detail = UserDetail.objects.create(user=user, **validated_data)
         return user_detail
