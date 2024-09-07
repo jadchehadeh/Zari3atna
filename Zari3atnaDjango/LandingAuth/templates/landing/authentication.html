@@ -114,15 +114,21 @@
         <h5 class="text-center form-title text-success">Create an Account</h5>
         <p class="text-center form-subtitle">Enter your personal details to create an account</p>
  {% comment %} start of the form we need to manage with api {% endcomment %}
-        <form class="form-container needs-validation" novalidate>
+        <form class="form-container needs-validation" method = "POST" action = " {% url 'user_registrations' %} "novalidate>
+         {% csrf_token %} 
           <div class="row">
             <div class="col-md-6 form-group">
               <label for="yourName" class="form-label text-success">Your Name</label>
-              <input type="text" name="name" class="form-control" id="yourName" required>
+              <input type="text" name="firstName" class="form-control" id="yourName" required>
+              <div class="invalid-feedback">Please, enter your name!</div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="yourName" class="form-label text-success">Your Name</label>
+              <input type="text" name="firstName" class="form-control" id="yourName" required>
               <div class="invalid-feedback">Please, enter your name!</div>
             </div>
 
-            <div class="col-md-6 form-group">
+            <div class="col-md-12 form-group">
               <label for="yourEmail" class="form-label text-success">Your Email</label>
               <input type="email" name="email" class="form-control" id="yourEmail" required>
               <div class="invalid-feedback">Please enter a valid Email address!</div>
@@ -134,20 +140,20 @@
               <label for="yourUsername" class="form-label text-success">Username</label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input type="text" name="username" class="form-control" id="yourUsername" required>
+                <input type="text" name="userName" class="form-control" id="yourUsername" required>
                 <div class="invalid-feedback">Please choose a username.</div>
               </div>
             </div>
 
             <div class="col-md-6 form-group">
               <label for="yourPassword" class="form-label text-success">Password</label>
-              <input type="password" name="password" class="form-control" id="yourPassword" required>
+              <input type="password" name="passWord" class="form-control" id="yourPassword" required>
               <div class="invalid-feedback">Please enter your password!</div>
             </div>
           </div>
 
           <div class="form-group form-check mb-4">
-            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+            <input class="form-check-input" name="cmbTerms" type="checkbox" value="" id="acceptTerms" required>
             <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
             <div class="invalid-feedback">You must agree before submitting.</div>
           </div>
