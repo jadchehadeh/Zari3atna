@@ -13,6 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserDetailSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    photo = serializers.ImageField(required=False)  # Add this line
 
     class Meta:
         model = UserDetail
@@ -23,4 +24,5 @@ class UserDetailSerializer(serializers.ModelSerializer):
         user = UserSerializer.create(UserSerializer(), validated_data=user_data)
         user_detail = UserDetail.objects.create(user=user, **validated_data)
         return user_detail
+
     #Maybe Here I should put update serializer because if i need to add a user profile maybe he need to add a new user#
